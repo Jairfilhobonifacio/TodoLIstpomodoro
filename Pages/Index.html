@@ -1,73 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="Pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODOSEUBEMESTAR</title>
-    <!-- CSS do projeto -->
+    <!-- Define o tipo de documento como HTML5 -->
+    <meta charset="UTF-8"> <!-- Define o charset como UTF-8 para suportar caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura o viewport para responsividade em dispositivos móveis -->
+    <title>TODOSEUBEMESTAR</title> <!-- Título da página que aparecerá na aba do navegador -->
+
+    <!-- Importa o CSS personalizado do projeto -->
     <link rel="stylesheet" href="/Src/Css/style.css">
-            
-    <!-- FONT AWESOME -->
+
+    <!-- Importa os ícones do Font Awesome para uso no projeto -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Js do projeto -->
+
+    <!-- Importa o JavaScript do projeto e adia a execução até que o DOM seja carregado -->
     <script src="/Src/JS/script.js" defer></script>
 </head>
 <body>
-    <div class="todo-container">
+    <div class="todo-container"> <!-- Contêiner principal do aplicativo de lista de tarefas -->
+
+        <!-- Cabeçalho da página com o título principal -->
         <header>
             <h1>Todo list com pomodoro</h1>
         </header>
-        <main>
+
+        <main> <!-- Contêiner principal do conteúdo da aplicação -->
+            <!-- Seção de adição e edição de tarefas -->
             <section>
+                <!-- Formulário para adicionar novas tarefas -->
                 <form id="todo-form">
                     <p>Adicione a sua tarefa:</p>
                     <div class="form-control">
-                        <input type="text" id="todo-input" placeholder="O que você vai fazer?" />
+                        <input type="text" id="todo-input" placeholder="O que você vai fazer?" /> <!-- Campo de entrada para novas tarefas -->
                         <button type="submit">
-                            <i class="fa-thin fa-plus"></i>
+                            <i class="fa-thin fa-plus"></i> <!-- Ícone de "adicionar" usando Font Awesome -->
                         </button>
                     </div>
                 </form>
+
+                <!-- Formulário para editar tarefas, escondido por padrão -->
                 <form id="edit-form" class="hide">
                     <p>Edite a sua tarefa:</p>
                     <div class="form-control">
-                        <input type="text" id="edit-input">
+                        <input type="text" id="edit-input"> <!-- Campo de entrada para editar uma tarefa existente -->
                         <button type="submit">
-                            <i class="fa-solid fa-check-double"></i>
+                            <i class="fa-solid fa-check-double"></i> <!-- Ícone de "confirmar edição" -->
                         </button>
-                        <button type="button" id="cancel-edit-btn">Cancelar</button>
+                        <button type="button" id="cancel-edit-btn">Cancelar</button> <!-- Botão para cancelar a edição -->
                     </div>
                 </form>
             </section>
+
+            <!-- Seção de ferramentas, incluindo pesquisa e filtro -->
             <section id="toolbar">
                 <div id="search">
                     <h4>Pesquisar:</h4>
                     <form>
-                        <input type="text" id="search-input" placeholder="Buscar">
+                        <input type="text" id="search-input" placeholder="Buscar"> <!-- Campo de pesquisa para tarefas -->
                         <button id="erase-button" type="button">
-                            <i class="fa-solid fa-delete-left"></i>
+                            <i class="fa-solid fa-delete-left"></i> <!-- Ícone de "apagar pesquisa" -->
                         </button>
                     </form>
                 </div>
+
                 <div id="filter">
                     <h4>Filtrar:</h4>
-                    <select id="filter-select">
+                    <select id="filter-select"> <!-- Filtro para exibir todas, tarefas feitas ou pendentes -->
                         <option value="all">Todos</option>
                         <option value="done">Feitos</option>
                         <option value="todo">A fazer</option>
                     </select>
                 </div>
             </section>
+
+            <!-- Seção onde as tarefas são listadas -->
             <section id="todo-list">
             </section>
+
+            <!-- Seção do temporizador Pomodoro -->
             <section id="pomodoro-timer">
                 <h2>Pomodoro Timer</h2>
                 <div id="timer">
-                    <span id="minutes">25</span>:<span id="seconds">00</span>
+                    <span id="minutes">25</span>:<span id="seconds">00</span> <!-- Exibição do tempo no formato MM:SS -->
                 </div>
                 <div class="pomodoro-controls">
-                    <button id="start-timer">Começar</button>
-                    <button id="reset-timer">Resetar</button>
+                    <button id="start-timer">Começar</button> <!-- Botão para iniciar o temporizador -->
+                    <button id="reset-timer">Resetar</button> <!-- Botão para reiniciar o temporizador -->
                 </div>
             </section>
         </main>
