@@ -9,7 +9,14 @@ const searchInput = document.querySelector("#search-input");
 const eraseBtn = document.querySelector("#erase-button");
 const filterSelect = document.querySelector("#filter-select");
 
+const startTimerBtn = document.querySelector("#start-timer");
+const resetTimerBtn = document.querySelector("#reset-timer");
+const timerDisplay = document.querySelector("#timer");
+const minutesDisplay = document.querySelector("#minutes");
+const secondsDisplay = document.querySelector("#seconds");
+
 let oldInputValue;
+let pomodoroInterval;
 
 // Funções
 // Função para criar e adicionar uma nova tarefa
@@ -35,6 +42,11 @@ const createTodoElement = (text, done = 0, saveToStorage = 1) => {
   deleteBtn.classList.add("remove-todo");
   deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
   todo.appendChild(deleteBtn);
+
+  const pomodoroBtn = document.createElement("button");
+  pomodoroBtn.classList.add("pomodoro-todo");
+  pomodoroBtn.innerHTML = '<i class="fa-solid fa-hourglass-start"></i>';
+  todo.appendChild(pomodoroBtn);
 
   if (done) {
     todo.classList.add("done");
@@ -101,6 +113,36 @@ const filterTodos = (filterValue) => {
   }
 };
 
+// Função para iniciar o temporizador Pomodoro
+const startPomodoroTimer = () => {
+  let minutes = 25;
+  let seconds = 0;
+
+  pomodoroInterval = setInterval(() => {
+    if (seconds === 0) {
+      if (minutes === 0) {
+        clearInterval(pomodoroInterval);
+        alert("Pomodoro completo!");
+      } else {
+        minutes--;
+        seconds = 59;
+      }
+    } else {
+      seconds--;
+    }
+
+    minutesDisplay.innerText = minutes.toString().padStart(2, '0');
+    secondsDisplay.innerText = seconds.toString().padStart(2, '0');
+  }, 1000);
+};
+
+// Função para resetar o temporizador Pomodoro
+const resetPomodoroTimer = () => {
+  clearInterval(pomodoroInterval);
+  minutesDisplay.innerText = "25";
+  secondsDisplay.innerText = "00";
+};
+
 // Eventos
 // Evento para adicionar uma nova tarefa
 todoForm.addEventListener("submit", (e) => {
@@ -135,6 +177,10 @@ document.addEventListener("click", (e) => {
     toggleForms();
     editInput.value = todoTitle;
     oldInputValue = todoTitle;
+  }
+
+  if (targetEl.classList.contains("pomodoro-todo")) {
+    startPomodoroTimer();
   }
 });
 
@@ -172,6 +218,10 @@ filterSelect.addEventListener("change", (e) => {
   const filterValue = e.target.value;
   filterTodos(filterValue);
 });
+
+// Eventos do Pomodoro
+startTimerBtn.addEventListener("click", startPomodoroTimer);
+resetTimerBtn.addEventListener("click", resetPomodoroTimer);
 
 // Local Storage
 // Função para obter tarefas do LocalStorage
